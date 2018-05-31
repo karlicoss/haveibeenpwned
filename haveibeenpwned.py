@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
+# pip3 install cfscrape
 import json
-import requests
 import sys
+import cfscrape # type: ignore
 
 from http import HTTPStatus
 
 def check(email):
+    scraper = cfscrape.create_scraper()
     query = "https://haveibeenpwned.com/api/v2/breachedaccount/" + email + "?includeUnverified=true"
-    check = requests.get(
+    check = scraper.get(
         query,
         verify=True,
     )
